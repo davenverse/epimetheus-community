@@ -69,6 +69,9 @@ lazy val redis4cats = mkProject("redis4cats")
 
 lazy val site = project.in(file("site"))
   .enablePlugins(TypelevelSitePlugin)
+  .settings(
+    tlSiteIsTypelevelProject := Some(TypelevelProject.Affiliate)
+  )
 
 def mkProject(name: String) =
   sbt.Project(name, file(name))
