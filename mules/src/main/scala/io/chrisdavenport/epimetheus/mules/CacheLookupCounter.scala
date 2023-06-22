@@ -42,7 +42,7 @@ object CacheLookupCounter {
         name,
         "Cache Lookup Status Counter.",
         Sized(Label("status")),
-        {c: (CacheLookupStatus) => Sized(CacheLookupStatus.statusValue(c))}
+        {(c: CacheLookupStatus) => Sized(CacheLookupStatus.statusValue(c))}
       ).map(c => 
         mc.withOnCacheMiss(_ => c.label(CacheMiss).inc)
           .withOnCacheHit((_, _) => c.label(CacheHit).inc)
