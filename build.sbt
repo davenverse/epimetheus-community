@@ -39,7 +39,6 @@ val log4catsV = "2.6.0"
 // Projects
 lazy val `epimetheus-community` = tlCrossRootProject
   .aggregate(log4cats, mules, redis4cats, site)
-  .disablePlugins(MimaPlugin)
 
 lazy val log4cats = mkProject("log4cats")
   .settings(
@@ -70,7 +69,6 @@ lazy val redis4cats = mkProject("redis4cats")
 
 lazy val site = project.in(file("site"))
   .enablePlugins(TypelevelSitePlugin)
-  .disablePlugins(MimaPlugin)
   .settings(
     tlSiteIsTypelevelProject := Some(TypelevelProject.Affiliate)
   )
