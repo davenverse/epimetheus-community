@@ -29,9 +29,15 @@ ThisBuild / mergifyStewardConfig ~= {
 
 // val munitCatsEffectV = "1.0.7"
 
+val circuitV = "0.5.1"
+
 val epimetheusV = "0.5.0"
+
 val mulesV = "0.7.0"
+
 val redis4catsV = "1.4.1"
+
+val rediculousV = "0.5.0"
 
 val log4catsV = "2.6.0"
 
@@ -43,7 +49,7 @@ lazy val `epimetheus-community` = tlCrossRootProject
 lazy val log4cats = mkProject("log4cats")
   .settings(
     name := "epimetheus-log4cats",
-    version := "0.6.0-SNAPSHOT",
+    version := "0.6.0",
     libraryDependencies ++= Seq(
       "org.typelevel"           %% "log4cats-core"              % log4catsV,
     )
@@ -52,7 +58,7 @@ lazy val log4cats = mkProject("log4cats")
 lazy val mules= mkProject("mules")
   .settings(
     name := "epimetheus-mules",
-    version := "0.5.0-SNAPSHOT",
+    version := "0.5.0",
     libraryDependencies ++= Seq(
       "io.chrisdavenport"           %% "mules"                      % mulesV,
     )
@@ -61,16 +67,16 @@ lazy val mules= mkProject("mules")
 lazy val rediculous = mkProject("rediculous")
   .settings(
     name := "epimetheus-rediculous",
-    version := "0.1.0-SNAPSHOT",
+    version := "0.1.0",
     libraryDependencies ++= Seq(
-      "io.chrisdavenport"  %% "rediculous" % "0.5.0",
+      "io.chrisdavenport"  %% "rediculous" % rediculousV,
     )
   )
 
 lazy val redis4cats = mkProject("redis4cats")
   .settings(
     name := "epimetheus-redis4cats",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.2.0",
     libraryDependencies ++= Seq(
       "dev.profunktor" %% "redis4cats-effects" % redis4catsV
     )
@@ -79,9 +85,9 @@ lazy val redis4cats = mkProject("redis4cats")
 lazy val circuit = mkProject("circuit")
   .settings(
     name := "epimetheus-circuit",
-    version := "0.5.1-SNAPSHOT",
+    version := "0.5.1",
     libraryDependencies ++= Seq(
-      "io.chrisdavenport" %% "circuit" % "0.5.1"
+      "io.chrisdavenport" %% "circuit" % circuitV,
     )
   )
 
