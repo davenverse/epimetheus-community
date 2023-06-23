@@ -43,7 +43,7 @@ lazy val `epimetheus-community` = tlCrossRootProject
 lazy val log4cats = mkProject("log4cats")
   .settings(
     name := "epimetheus-log4cats",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.6.0-SNAPSHOT",
     libraryDependencies ++= Seq(
       "org.typelevel"           %% "log4cats-core"              % log4catsV,
     )
@@ -52,7 +52,7 @@ lazy val log4cats = mkProject("log4cats")
 lazy val mules= mkProject("mules")
   .settings(
     name := "epimetheus-mules",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.5.0-SNAPSHOT",
     libraryDependencies ++= Seq(
       "io.chrisdavenport"           %% "mules"                      % mulesV,
     )
@@ -61,7 +61,7 @@ lazy val mules= mkProject("mules")
 lazy val rediculous = mkProject("rediculous")
   .settings(
     name := "epimetheus-rediculous",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.1.0-SNAPSHOT",
     libraryDependencies ++= Seq(
       "io.chrisdavenport"  %% "rediculous" % "0.5.0",
     )
@@ -79,7 +79,7 @@ lazy val redis4cats = mkProject("redis4cats")
 lazy val circuit = mkProject("circuit")
   .settings(
     name := "epimetheus-circuit",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.5.1-SNAPSHOT",
     libraryDependencies ++= Seq(
       "io.chrisdavenport" %% "circuit" % "0.5.1"
     )
