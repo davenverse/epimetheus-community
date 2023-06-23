@@ -38,7 +38,7 @@ val log4catsV = "2.6.0"
 
 // Projects
 lazy val `epimetheus-community` = tlCrossRootProject
-  .aggregate(log4cats, mules, redis4cats)
+  .aggregate(log4cats, mules, redis4cats, site)
 
 lazy val log4cats = mkProject("log4cats")
   .settings(
