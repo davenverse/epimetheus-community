@@ -40,6 +40,14 @@ pull_request_rules:
       add:
       - mules
       remove: []
+- name: Label rediculous PRs
+  conditions:
+  - files~=^rediculous/
+  actions:
+    label:
+      add:
+      - rediculous
+      remove: []
 - name: Label redis4cats PRs
   conditions:
   - files~=^redis4cats/
