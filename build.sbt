@@ -1,3 +1,4 @@
+ThisBuild / version := "0.0.1" // global version to determine central or snapshots.
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
 ThisBuild / licenses := Seq(License.MIT)
