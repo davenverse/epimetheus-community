@@ -16,6 +16,14 @@ pull_request_rules:
   - status-success=Build and Test (ubuntu-latest, 3, temurin@17, epimetheus-communityJVM)
   actions:
     merge: {}
+- name: Label circuit PRs
+  conditions:
+  - files~=^circuit/
+  actions:
+    label:
+      add:
+      - circuit
+      remove: []
 - name: Label log4cats PRs
   conditions:
   - files~=^log4cats/

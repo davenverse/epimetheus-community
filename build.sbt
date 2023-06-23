@@ -38,7 +38,7 @@ val log4catsV = "2.6.0"
 
 // Projects
 lazy val `epimetheus-community` = tlCrossRootProject
-  .aggregate(log4cats, mules, redis4cats, site)
+  .aggregate(circuit, mules, log4cats, redis4cats, site)
 
 lazy val log4cats = mkProject("log4cats")
   .settings(
@@ -64,6 +64,15 @@ lazy val redis4cats = mkProject("redis4cats")
     version := "0.0.1-SNAPSHOT",
     libraryDependencies ++= Seq(
       "dev.profunktor" %% "redis4cats-effects" % redis4catsV
+    )
+  )
+
+lazy val circuit = mkProject("circuit")
+  .settings(
+    name := "epimetheus-circuit",
+    version := "0.0.1-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      "io.chrisdavenport" %% "circuit" % "0.5.1"
     )
   )
 
