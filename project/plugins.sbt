@@ -9,5 +9,5 @@ addSbtPlugin("org.typelevel" % "sbt-typelevel-mergify" % sbtTypelevelVersion)
 addSbtPlugin("org.typelevel" % "sbt-typelevel-mima" % sbtTypelevelVersion)
 
 libraryDependencies ++= Seq(
-  "io.get-coursier" %% "coursier" % "2.1.5"
+  "io.get-coursier" %% "coursier" % "2.1.6"
 )
