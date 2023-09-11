@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -50,7 +50,7 @@ jobs:
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' reload +update
+        run: sbt +update
 
       - name: Check that workflows are up to date
         run: sbt githubWorkflowCheck
@@ -84,7 +84,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -99,7 +99,7 @@ jobs:
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt reload +update
+        run: sbt +update
 
       - name: Download target directories (2.13, epimetheus-communityJVM)
         uses: actions/download-artifact@v3
@@ -155,7 +155,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -170,13 +170,13 @@ jobs:
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt '++ ${{ matrix.scala }}' reload +update
+        run: sbt +update
 
       - name: Submit Dependencies
         uses: scalacenter/sbt-dependency-submission@v2
         with:
-          modules-ignore: epimetheus-community site epimetheus-communityJS epimetheus-communityJVM epimetheus-communityNative
-          configs-ignore: test scala-tool scala-doc-tool
+          modules-ignore: site_2.13 site_3 epimetheus-communityjs_2.13 epimetheus-communityjs_3 epimetheus-communityjvm_2.13 epimetheus-communityjvm_3 epimetheus-communitynative_2.13 epimetheus-communitynative_3
+          configs-ignore: test scala-tool scala-doc-tool test-internal
 
   site:
     name: Generate Site
@@ -187,7 +187,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -202,7 +202,7 @@ jobs:
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt reload +update
+        run: sbt +update
 
       - name: Generate site
         run: sbt site/tlSite
