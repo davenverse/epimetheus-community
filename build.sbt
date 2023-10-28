@@ -36,7 +36,7 @@ val epimetheusV = "0.5.0"
 
 val mulesV = "0.7.0"
 
-val redis4catsV = "1.5.0"
+val redis4catsV = "1.5.2"
 
 val rediculousV = "0.5.0"
 
