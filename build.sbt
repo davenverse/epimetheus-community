@@ -38,7 +38,7 @@ val mulesV = "0.7.0"
 
 val redis4catsV = "1.5.0"
 
-val rediculousV = "0.5.0"
+val rediculousV = "0.5.1"
 
 val log4catsV = "2.6.0"
 
