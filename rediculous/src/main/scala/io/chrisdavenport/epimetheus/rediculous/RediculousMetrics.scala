@@ -18,9 +18,9 @@ object RediculousMetrics {
     * @return A function which turn a redisConnection into one that measures
     */
   def measured[F[_]: Async](
-    collector: CollectorRegistry[F]
+    pr: PrometheusRegistry[F]
   ): F[RedisConnection[F] => RedisConnection[F]] = {
-    measuredByName(collector).map(_("default"))
+    measuredByName(pr).map(_("default"))
   }
 
   /**
@@ -40,18 +40,18 @@ object RediculousMetrics {
     * @return A function which turn a redisConnection into one that measures
     */
   def measuredByName[F[_]: Async](
-    collector: CollectorRegistry[F]
+    pr: PrometheusRegistry[F]
   ): F[String => RedisConnection[F] => RedisConnection[F]] = {
     for {
       durationHistogram <- Histogram.labelled(
-        collector,
+        pr,
         Name("rediculous_duration_seconds"),
         "Rediculous Seconds Spent Per Operation",
         Sized(Label("name")),
         {(name: String) => Sized(name)},
       )
       operationTime <- Counter.labelled(
-        collector, 
+        pr,
         Name("rediculous_operation_seconds_total"),
         "Rediculous Seconds Spent During Each Operation Total",
         Sized(Label("name"), Label("operation"), Label("outcome")),
@@ -60,7 +60,7 @@ object RediculousMetrics {
         }
       )
       operationCount <- Counter.labelled(
-        collector, 
+        pr,
         Name("rediculous_operation_count_total"),
         "Rediculous Count Of Each Operation",
         Sized(Label("name"), Label("operation"), Label("outcome")),

@@ -17,11 +17,11 @@ object RejectedExecutionCounter {
    * which can be applied to multiple circuit breakers.
    */
   def register[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     metricName: Name = Name("circuit_rejected_execution_total")
   ): F[RejectedExecutionCounter[F]] =
     Counter.labelled(
-      cr,
+      pr,
       metricName,
       "Circuit Breaker Rejected Executions.",
       Sized(Label("circuit_name")),
@@ -42,11 +42,11 @@ object RejectedExecutionCounter {
    * Single Metered Circuit
    */
   def meteredCircuit[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     metricName: Name,
     circuit: CircuitBreaker[F]
   ): F[CircuitBreaker[F]] = 
-    Counter.noLabels[F](cr, metricName, "Circuit Breaker Rejected Executions.")
+    Counter.noLabels[F](pr, metricName, "Circuit Breaker Rejected Executions.")
       .map(counter => circuit.doOnRejected(counter.inc))
 
 }

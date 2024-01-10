@@ -21,10 +21,10 @@ object LogModifier {
    * modify loggers such that their logging will be reflected
    * in the registry.
    */
-  def register[F[_]: Sync](cr: CollectorRegistry[F], name: Name = Name("log4cats_total")): F[LogModifier[F]] = {
+  def register[F[_]: Sync](pr: PrometheusRegistry[F], name: Name = Name("log4cats_total")): F[LogModifier[F]] = {
     for {
       counter <- Counter.labelled(
-        cr, 
+        pr,
         name,
         "Log4cats Log Totals.",
         Sized(Label("level")),
@@ -38,22 +38,22 @@ object LogModifier {
    * modify a single SelfAwareLogger
    */
   def selfAware[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     selfAware: SelfAwareLogger[F],
     name: Name = Name("log4cats_total")
   ): F[SelfAwareLogger[F]] = 
-    register(cr, name).map(_.selfAware(selfAware))
+    register(pr, name).map(_.selfAware(selfAware))
 
   /**
    * Convenience Constructor for when you only want to
    * modify a single SelfAwareStructuredLogger
    */
   def selfAwareStructured[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     selfAware: SelfAwareStructuredLogger[F],
     name: Name = Name("log4cats_total")
   ): F[SelfAwareStructuredLogger[F]] = 
-    register(cr, name).map(_.selfAwareStructured(selfAware))
+    register(pr, name).map(_.selfAwareStructured(selfAware))
 
   private def reportLevel(l: LogLevel): String = l match {
     case Error => "error"
