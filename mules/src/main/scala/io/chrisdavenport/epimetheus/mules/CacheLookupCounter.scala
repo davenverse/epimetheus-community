@@ -21,11 +21,11 @@ object CacheLookupCounter {
 
 
   def register[F[_]: Sync](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     name: Name = Name("mules_cache_lookup_total")
   ): F[CacheLookupCounter[F]] = 
     Counter.labelled(
-      cr,
+      pr,
       name,
       "Cache Lookup Status Counter.",
       Sized(Label("cache_name"), Label("status")),
@@ -34,11 +34,11 @@ object CacheLookupCounter {
 
 
   def meteredMemoryCache[F[_]: Sync, K, V](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     name: Name,
     mc: MemoryCache[F, K, V]): F[MemoryCache[F, K, V]] = 
       Counter.labelled(
-        cr,
+        pr,
         name,
         "Cache Lookup Status Counter.",
         Sized(Label("status")),
@@ -49,12 +49,12 @@ object CacheLookupCounter {
       )
 
   def meteredLookup[F[_]: Sync, K, V](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     name: Name,
     lookup: Lookup[F, K, V]
   ): F[Lookup[F, K, V]] =
     Counter.labelled(
-      cr,
+      pr,
       name,
       "Cache Lookup Status Counter.",
       Sized(Label("status")),
@@ -62,12 +62,12 @@ object CacheLookupCounter {
     ).map(new SingleLookupCounted(_, lookup))
 
   def meteredCache[F[_]: Sync, K, V](
-    cr: CollectorRegistry[F],
+    pr: PrometheusRegistry[F],
     name: Name,
     cache: Cache[F, K, V]
   ): F[Cache[F, K, V]] = 
     Counter.labelled(
-      cr,
+      pr,
       name,
       "Cache Lookup Status Counter.",
       Sized(Label("status")),

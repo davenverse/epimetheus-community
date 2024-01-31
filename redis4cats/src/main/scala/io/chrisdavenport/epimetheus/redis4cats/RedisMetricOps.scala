@@ -31,11 +31,11 @@ trait RedisMetricOps[M[_]] {
 object RedisMetricOps {
 
   def build[F[_]: Sync](
-      cr: CollectorRegistry[F],
+      pr: PrometheusRegistry[F],
       prefix: Name = Name("redis4cats"), 
       buckets: List[Double] = Histogram.defaults,
     ): F[RedisMetricOps[F]] = 
-      MetricsCollection.build[F](cr, prefix, buckets).map(new EpOps(_))
+      MetricsCollection.build[F](pr, prefix, buckets).map(new EpOps(_))
 
   sealed trait TerminationType
 
@@ -74,12 +74,12 @@ object RedisMetricOps {
   )
   private object MetricsCollection {
     def build[F[_]: Sync](
-      cr: CollectorRegistry[F],
+      pr: PrometheusRegistry[F],
       prefix: Name, 
       buckets: List[Double],
     ) = for {
       operations <- Histogram.labelledBuckets(
-        cr,
+        pr,
         prefix |+| Name("_") |+| Name("operations"),
         "Total Operations.",
         Sized(Label("termination_type"), Label("classifier")),
@@ -87,7 +87,7 @@ object RedisMetricOps {
         buckets:_*
       )
       active<- Gauge.labelled(
-        cr, 
+        pr,
         prefix |+| Name("_") |+| Name("active"),
         "Total Active Operations.",
         Sized(Label("classifier")),
