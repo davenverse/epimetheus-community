@@ -40,7 +40,7 @@ val redis4catsV = "1.5.0"
 
 val rediculousV = "0.5.1"
 
-val log4catsV = "2.6.0"
+val log4catsV = "2.7.0"
 
 
 // Projects
