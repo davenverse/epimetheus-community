@@ -11,7 +11,7 @@ ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSonatypeUseLegacyHost := true
 
 
-val Scala3 = "3.3.1"
+val Scala3 = "3.3.3"
 
 ThisBuild / crossScalaVersions := Seq("2.13.12", Scala3)
 ThisBuild / scalaVersion := Scala3
