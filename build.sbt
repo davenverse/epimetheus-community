@@ -8,12 +8,11 @@ ThisBuild / developers := List(
 ThisBuild / versionScheme := Some("early-semver")
 
 ThisBuild / tlCiReleaseBranches := Seq("main")
-ThisBuild / tlSonatypeUseLegacyHost := true
 
 
-val Scala3 = "3.3.3"
+val Scala3 = "3.3.8"
 
-ThisBuild / crossScalaVersions := Seq("2.13.12", Scala3)
+ThisBuild / crossScalaVersions := Seq("2.13.18", Scala3)
 ThisBuild / scalaVersion := Scala3
 
 ThisBuild / testFrameworks += new TestFramework("munit.Framework")
@@ -24,7 +23,7 @@ ThisBuild / tlSitePublishBranch := Some("main")
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
 
 ThisBuild / mergifyStewardConfig ~= {
-  _.map(_.copy(mergeMinors = true, author = "davenverse-steward[bot]"))
+  _.map(_.withMergeMinors(true).withAuthor("davenverse-steward[bot]"))
 }
 
 
@@ -111,7 +110,7 @@ def mkProject(name: String) =
         try { // if this dep already exists, skip publishing
           Resolve()
             .addDependencies(dep)
-            .addRepositories(Repositories.sonatype("releases"))
+            .addRepositories(Repositories.central)
             .run()
           true
         } catch {
