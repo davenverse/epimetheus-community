@@ -7,7 +7,7 @@ ThisBuild / developers := List(
 )
 ThisBuild / versionScheme := Some("early-semver")
 
-ThisBuild / tlCiReleaseBranches := Seq("main")
+ThisBuild / tlCiReleaseBranches := Seq()
 
 
 val Scala3 = "3.3.8"
@@ -17,7 +17,7 @@ ThisBuild / scalaVersion := Scala3
 
 ThisBuild / testFrameworks += new TestFramework("munit.Framework")
 
-ThisBuild / tlCiReleaseBranches := Seq("main")
+ThisBuild / tlCiReleaseBranches := Seq()
 ThisBuild / tlSitePublishBranch := Some("main")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
